@@ -11,15 +11,15 @@ import android.widget.TimePicker;
 /**
  * Created by myxom on 16/02/16.
  */
-public class TimePickerDialogFragment extends DialogFragment {
+public class ButtonTimePickerDialogFragment extends DialogFragment {
     Handler mHandler ;
     int mHour;
     int mMinute;
 
-    //public TimePickerDialogFragment(){}; //solves a lint issue
+    //public ButtonTimePickerDialogFragment(){}; //solves a lint issue
 
-    public TimePickerDialogFragment(Handler h){ //another lint issue
-        /** Getting the reference to the message handler instantiated in MainActivity class */
+    public ButtonTimePickerDialogFragment(Handler h){ //another lint issue
+        //get a reference to the message handler instantiated in mainactivity
         mHandler = h;
     }
 
@@ -30,10 +30,10 @@ public class TimePickerDialogFragment extends DialogFragment {
         Bundle b = getArguments();
 
         /** Getting the hour of day from bundle */
-        mHour = b.getInt("set_hour");
+        mHour = b.getInt("current_hour");
 
         /** Getting the minute of hour from bundle */
-        mMinute = b.getInt("set_minute");
+        mMinute = b.getInt("current_minute");
 
         TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
 
@@ -47,13 +47,13 @@ public class TimePickerDialogFragment extends DialogFragment {
                 Bundle b = new Bundle();
 
                 /** Adding currently set hour to bundle object */
-                b.putInt("set_hour", mHour);
+                b.putInt("current_hour", mHour);
 
                 /** Adding currently set minute to bundle object */
-                b.putInt("set_minute", mMinute);
+                b.putInt("current_minute", mMinute);
 
                 /** Adding Current time in a string to bundle object */
-                b.putString("set_time", "Set Time : " + Integer.toString(mHour) + " : " + Integer.toString(mMinute));
+                b.putString("current_time", "Set Time : " + Integer.toString(mHour) + " : " + Integer.toString(mMinute));
 
                 /** Creating an instance of Message */
                 Message m = new Message();
@@ -67,6 +67,6 @@ public class TimePickerDialogFragment extends DialogFragment {
         };
 
         /** Opening the TimePickerDialog window */
-        return new TimePickerDialog(getActivity(), listener, mHour, mMinute, false);
+        return new TimePickerDialog(getActivity(), listener, mHour, mMinute, true);
     }
 }
